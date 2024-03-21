@@ -1,0 +1,14 @@
+#version: '3.5'
+#services:
+#  message-server:
+#    container_name: spring-form
+#    build:
+#      context: docker-message-server
+#      dockerfile: Dockerfile
+#    image: spring-form
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - spring-cloud-network
+#  product-server:
+#    container_name: product-server
