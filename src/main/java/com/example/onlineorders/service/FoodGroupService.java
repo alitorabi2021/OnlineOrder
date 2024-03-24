@@ -17,15 +17,9 @@ public class FoodGroupService implements IService<FoodGroup> {
         this.foodGroupRepository = foodGroupRepository;
     }
     @Override
-    public String saveOrUpdate(FoodGroup foodGroup) {
-        if (foodGroupRepository.getFoodsGroupById(foodGroup.getId()) ==null
-                && foodGroupRepository.getFoodsGroupByName(foodGroup.getName())==null){
+    public String save(FoodGroup foodGroup) {
             foodGroupRepository.save(foodGroup);
             return "save drink in database";
-        }else {
-            foodGroupRepository.save(updateFoodGroup(foodGroup));
-            return "update drink in database";
-        }
     }
 
 
@@ -46,9 +40,11 @@ public class FoodGroupService implements IService<FoodGroup> {
         return "delete FoodsGroup is database";
     }
 
-    public FoodGroup updateFoodGroup(FoodGroup foodGroup){
+    @Override
+    public FoodGroup update(FoodGroup foodGroup){
         FoodGroup newFoodGroup =checkData(foodGroup);
         newFoodGroup.setName(foodGroup.getName());
+        foodGroupRepository.save(newFoodGroup);
         return newFoodGroup;
     }
 

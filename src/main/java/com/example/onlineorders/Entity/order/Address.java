@@ -24,6 +24,4 @@ public class Address {
         @NotNull
         @NotBlank
         private String plaqueHome;
-
-
 }

@@ -21,7 +21,7 @@ public class DrinkController {
 
     @PostMapping
     public ResponseEntity<String> saveDrink(@RequestBody Drink drink){
-       return new ResponseEntity<>(drinkService.saveOrUpdate(drink), HttpStatus.CREATED);
+       return new ResponseEntity<>(drinkService.save(drink), HttpStatus.CREATED);
     }
     @GetMapping
     public ResponseEntity<List<Drink>>getAllDrink(){
@@ -33,7 +33,7 @@ public class DrinkController {
     }
     @PutMapping
     public Drink updateDrink(@RequestBody Drink drink){
-        return drinkService.updateDrink(drink);
+        return drinkService.update(drink);
     }
     @DeleteMapping
     public String deleteDrink(@RequestBody Drink drink){

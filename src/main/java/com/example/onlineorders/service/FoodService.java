@@ -16,26 +16,21 @@ public class FoodService implements IService<Food>{
         this.foodRepository = foodRepository;
     }
 
-
-    public Food updateFood(Food food) {
+    @Override
+    public Food update(Food food) {
         Food oldFood =checkData(food);
         oldFood.setFoodGroup(food.getFoodGroup());
         oldFood.setName(food.getName());
         oldFood.setPrice(food.getPrice());
         oldFood.setDescription(food.getDescription());
+        foodRepository.save(oldFood);
         return oldFood;
     }
 
     @Override
-    public String saveOrUpdate(Food food) {
-        if (foodRepository.getFoodsById(food.getId())==null
-                && foodRepository.getFoodsByName(food.getName())==null){
+    public String save(Food food) {
             foodRepository.save(food);
             return "save food in database";
-        }else {
-            foodRepository.save(updateFood(food));
-            return "update food in database";
-        }
     }
 
     @Override

@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,23 +25,27 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 public class Clients {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @NotNull(message = "Please enter your first and last name !")
+    @NotBlank(message = "Your first and last name must not be blank")
     private String fullName;
-    @NotNull
-    @Column(unique = true)
+    @Email(message = "this email is not valid please enter true email")
     @NaturalId
-    @NotBlank
-    @Email
+    @NotNull(message = "please enter your email !")
+    @NotBlank(message = "Your email name must not be blank")
     private String email;
+    @NotNull(message = "please enter your phoneNumber !")
+    @NotBlank(message = "Your phoneNumber name must not be blank")
     private String phoneNumber;
-    @NotNull
+    @NotNull(message = "please enter your password !")
+    @NotBlank(message = "Your password name must not be blank")
     private String password;
     @ManyToOne
+    @NotNull
     private RoleClients roleClients;
 
 }

@@ -17,15 +17,9 @@ public class DrinkService implements IService<Drink>{
     }
 
     @Override
-    public String saveOrUpdate(Drink drink) {
-        if (drinkRepository.getDrinkById(drink.getId())==null && drinkRepository.getDrinkByName(drink.getName()) == null){
+    public String save(Drink drink) {
             drinkRepository.save(drink);
             return "save drink in database";
-        }else {
-            drinkRepository.save(updateDrink(drink));
-            return "update drink in database";
-        }
-
     }
 
     @Override
@@ -41,12 +35,13 @@ public class DrinkService implements IService<Drink>{
 
     @Override
     public String delete(Drink drink) {
-        drinkRepository.delete(updateDrink(drink));
+        drinkRepository.delete(drink);
         return "delete the Drink";
     }
 
 
-    public Drink updateDrink(Drink drink){
+    @Override
+    public Drink update(Drink drink){
         Drink newDrink;
         if (drink.getId()!=null) {
             newDrink = drinkRepository.getDrinkById(drink.getId());
@@ -55,6 +50,7 @@ public class DrinkService implements IService<Drink>{
         }
         newDrink.setName(drink.getName());
         newDrink.setPrice(drink.getPrice());
+        drinkRepository.save(newDrink);
         return newDrink;
     }
 

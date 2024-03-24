@@ -19,17 +19,12 @@ public class OrderService implements IService<Order>{
         this.orderRepository = orderRepository;
     }
     @Override
-    public String saveOrUpdate(Order order) {
-        if (orderRepository.getOrderById(order.getId())==null &&
-        orderRepository.getOrderByOrderNumber(order.getOrderNumber())==null){
+    public String save(Order order) {
             orderRepository.save(order);
             return "save order in database";
-        }else {
-            orderRepository.save(updateOrder(order));
-            return "update order in database" ;
         }
 
-    }
+
 
     @Override
     public Order getById(Integer id) {
@@ -60,12 +55,14 @@ public class OrderService implements IService<Order>{
     }
 
 
-    public Order updateOrder(Order order){
+    @Override
+    public Order update(Order order){
         Order oldOrder=checkData(order);
         oldOrder.setOrderNumber(order.getOrderNumber());
         oldOrder.setFoods(order.getFoods());
         oldOrder.setDrinks(order.getDrinks());
         oldOrder.setClients(order.getClients());
+        orderRepository.save(oldOrder);
         return oldOrder;
     }
 

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ClientsService implements IService<Clients>{
 
    private final
@@ -38,16 +38,10 @@ public class ClientsService implements IService<Clients>{
     }
 
     @Override
-    public String saveOrUpdate(Clients clients) {
-        if (clientsRepository.getClientsById(clients.getId())==null
-                && clientsRepository.findByEmail(clients.getEmail()).isEmpty()){
+    public String save(Clients clients) {
             clients.setPassword(bCryptPasswordEncoder.encode(clients.getPassword()));
             clientsRepository.save(clients);
             return "save drink in database";
-        }else {
-            clientsRepository.save(updateClient(clients));
-            return "update drink in database";
-        }
     }
 
     @Override
@@ -62,12 +56,13 @@ public class ClientsService implements IService<Clients>{
 
     @Override
     public String delete(Clients clients) {
-         clientsRepository.delete(updateClient(clients));
+         clientsRepository.delete(clients);
          return "delete User in database";
     }
 
 
-    public Clients updateClient(Clients client){
+    @Override
+    public Clients update(Clients client){
         Clients oldClient;
         if (client.getId()!=null) {
             oldClient=clientsRepository.getClientsById(client.getId());
@@ -78,6 +73,7 @@ public class ClientsService implements IService<Clients>{
         oldClient.setEmail(client.getEmail());
         oldClient.setFullName(client.getFullName());
         oldClient.setPhoneNumber(client.getPhoneNumber());
+        clientsRepository.save(oldClient);
         return oldClient;
     }
 }

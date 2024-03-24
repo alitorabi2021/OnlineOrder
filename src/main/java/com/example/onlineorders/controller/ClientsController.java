@@ -5,6 +5,8 @@ import com.example.onlineorders.jwt.JwtService;
 import com.example.onlineorders.jwt.LoginResponse;
 import com.example.onlineorders.security.MyClientsDetails;
 import com.example.onlineorders.service.ClientsService;
+import jakarta.annotation.PreDestroy;
+import jakarta.validation.Valid;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +43,8 @@ public class ClientsController {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveClients(@RequestBody Clients clients){
-        clientsService.saveOrUpdate(clients);
+    public ResponseEntity<String> saveClients(@RequestBody @Valid Clients clients){
+        clientsService.save(clients);
         return new ResponseEntity<>("Create the client go to /login",HttpStatus.CREATED);
     }
 
@@ -54,7 +56,15 @@ public class ClientsController {
     public ResponseEntity<Clients> getClientById(@Param("id") Integer id){
         return new ResponseEntity<>(clientsService.getById(id),HttpStatus.ACCEPTED);
     }
-    @DeleteMapping("/email")
+
+    @PutMapping
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Clients> updateClient(Clients clients){
+        return new ResponseEntity<>(clientsService.update(clients),HttpStatus.UPGRADE_REQUIRED);
+    }
+
+
+    @DeleteMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> deleteClientByEmail(@RequestBody Clients clients){
         return new ResponseEntity<>(clientsService.delete(clients),HttpStatus.ACCEPTED);

@@ -20,7 +20,7 @@ public class FoodGroupController {
     }
     @PostMapping
     public ResponseEntity<String> saveFoodGroup(@RequestBody FoodGroup foodGroup){
-        return new ResponseEntity<>(foodGroupService.saveOrUpdate(foodGroup), HttpStatus.CREATED);
+        return new ResponseEntity<>(foodGroupService.save(foodGroup), HttpStatus.CREATED);
     }
 
     @GetMapping("/id")

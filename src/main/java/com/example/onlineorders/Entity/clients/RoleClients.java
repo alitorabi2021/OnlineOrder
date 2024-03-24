@@ -19,5 +19,6 @@ public class RoleClients {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull(message = "error! this role is null")
     private String name;
 }

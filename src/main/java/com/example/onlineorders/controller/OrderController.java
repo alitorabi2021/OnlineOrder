@@ -23,7 +23,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<String> saveOrder(@RequestBody Order order){
-        String orderMessage=orderService.saveOrUpdate(order);
+        String orderMessage=orderService.save(order);
         return new ResponseEntity<>(orderMessage, HttpStatus.CREATED);
     }
 
