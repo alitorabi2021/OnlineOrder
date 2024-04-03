@@ -5,7 +5,6 @@ import com.example.onlineorders.jwt.JwtService;
 import com.example.onlineorders.jwt.LoginResponse;
 import com.example.onlineorders.security.MyClientsDetails;
 import com.example.onlineorders.service.ClientsService;
-import jakarta.annotation.PreDestroy;
 import jakarta.validation.Valid;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -24,16 +23,18 @@ public class ClientsController {
     private final JwtService jwtService;
     private final   ClientsService clientsService;
 
+
     public ClientsController(JwtService jwtService, ClientsService clientsService) {
         this.jwtService = jwtService;
         this.clientsService = clientsService;
+        
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> authenticate(@RequestBody Clients clients) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            Clients authenticatedUser = clientsService.authenticate(clients);
+            Clients authenticatedUser =clientsService.authenticate(clients);
             String jwtToken = jwtService.generateToken(new MyClientsDetails(authenticatedUser));
             LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime());
             return new ResponseEntity<>(loginResponse.getToken(), HttpStatus.OK);
@@ -58,7 +59,7 @@ public class ClientsController {
     }
 
     @PutMapping
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("#{hasRole('ADMIN')}")
     public ResponseEntity<Clients> updateClient(Clients clients){
         return new ResponseEntity<>(clientsService.update(clients),HttpStatus.UPGRADE_REQUIRED);
     }

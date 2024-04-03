@@ -11,5 +11,4 @@ public interface ClientsRepository extends JpaRepository<Clients,Integer> {
 
     Optional<Clients> findByEmail(String email);
     Clients getClientsById(Integer id);
-    Clients getClientsByPhoneNumber(String phoneNumber);
 }
