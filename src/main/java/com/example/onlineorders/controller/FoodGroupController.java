@@ -1,6 +1,6 @@
 package com.example.onlineorders.controller;
 
-import com.example.onlineorders.Entity.food.FoodGroup;
+import com.example.onlineorders.data.Entity.food.FoodGroup;
 import com.example.onlineorders.service.FoodGroupService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;

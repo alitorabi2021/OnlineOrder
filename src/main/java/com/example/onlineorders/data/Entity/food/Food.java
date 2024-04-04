@@ -1,4 +1,4 @@
-package com.example.onlineorders.Entity.food;
+package com.example.onlineorders.data.Entity.food;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

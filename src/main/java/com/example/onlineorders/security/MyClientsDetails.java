@@ -1,7 +1,6 @@
 package com.example.onlineorders.security;
 
-import com.example.onlineorders.Entity.clients.Clients;
-import com.example.onlineorders.Entity.clients.RoleClients;
+import com.example.onlineorders.data.Entity.clients.Clients;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

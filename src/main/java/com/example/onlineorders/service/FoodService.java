@@ -1,7 +1,7 @@
 package com.example.onlineorders.service;
 
-import com.example.onlineorders.Entity.food.Food;
-import com.example.onlineorders.repository.FoodRepository;
+import com.example.onlineorders.data.Entity.food.Food;
+import com.example.onlineorders.data.repository.FoodRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

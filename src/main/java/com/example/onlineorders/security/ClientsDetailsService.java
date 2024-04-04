@@ -1,7 +1,7 @@
 package com.example.onlineorders.security;
 
-import com.example.onlineorders.Entity.clients.Clients;
-import com.example.onlineorders.repository.ClientsRepository;
+import com.example.onlineorders.data.Entity.clients.Clients;
+import com.example.onlineorders.data.repository.ClientsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

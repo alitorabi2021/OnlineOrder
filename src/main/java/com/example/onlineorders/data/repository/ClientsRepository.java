@@ -1,6 +1,6 @@
-package com.example.onlineorders.repository;
+package com.example.onlineorders.data.repository;
 
-import com.example.onlineorders.Entity.clients.Clients;
+import com.example.onlineorders.data.Entity.clients.Clients;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

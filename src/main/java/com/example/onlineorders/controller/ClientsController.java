@@ -1,6 +1,6 @@
 package com.example.onlineorders.controller;
 
-import com.example.onlineorders.Entity.clients.Clients;
+import com.example.onlineorders.data.Entity.clients.Clients;
 import com.example.onlineorders.jwt.JwtService;
 import com.example.onlineorders.jwt.LoginResponse;
 import com.example.onlineorders.security.MyClientsDetails;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/clients")
+@RequestMapping(value = "/clients")
 @RestController
 public class ClientsController {
     private final JwtService jwtService;
@@ -51,11 +51,11 @@ public class ClientsController {
 
     @GetMapping
     public ResponseEntity<List<Clients>> getAllClients(){
-        return new ResponseEntity<>(clientsService.getAll(),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(clientsService.getAll(),HttpStatus.OK);
     }
     @GetMapping("/id")
     public ResponseEntity<Clients> getClientById(@Param("id") Integer id){
-        return new ResponseEntity<>(clientsService.getById(id),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(clientsService.getById(id), HttpStatus.ACCEPTED);
     }
 
     @PutMapping
@@ -66,7 +66,7 @@ public class ClientsController {
 
 
     @DeleteMapping
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("#{hasRole('ADMIN')}")
     public ResponseEntity<String> deleteClientByEmail(@RequestBody Clients clients){
         return new ResponseEntity<>(clientsService.delete(clients),HttpStatus.ACCEPTED);
     }

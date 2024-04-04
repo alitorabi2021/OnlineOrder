@@ -1,16 +1,13 @@
 package com.example.onlineorders.service;
 
-import com.example.onlineorders.Entity.clients.Clients;
-import com.example.onlineorders.Entity.drink.Drink;
-import com.example.onlineorders.repository.ClientsRepository;
+import com.example.onlineorders.data.Entity.clients.Clients;
+import com.example.onlineorders.data.repository.ClientsRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,8 +52,14 @@ public class ClientsService implements IService<Clients>{
     }
 
     @Override
-    public String delete(Clients clients) {
-         clientsRepository.delete(clients);
+    public String delete(Clients client) {
+        Clients deleteClient;
+        if (client.getId()!=null) {
+            deleteClient=clientsRepository.getClientsById(client.getId());
+        }else {
+            deleteClient=clientsRepository.findByEmail(client.getEmail()).orElseThrow();
+        }
+        clientsRepository.delete(deleteClient);
          return "delete User in database";
     }
 

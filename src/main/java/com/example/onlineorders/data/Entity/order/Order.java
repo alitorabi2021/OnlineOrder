@@ -1,10 +1,9 @@
-package com.example.onlineorders.Entity.order;
+package com.example.onlineorders.data.Entity.order;
 
-import com.example.onlineorders.Entity.clients.Clients;
-import com.example.onlineorders.Entity.drink.Drink;
-import com.example.onlineorders.Entity.food.Food;
+import com.example.onlineorders.data.Entity.clients.Clients;
+import com.example.onlineorders.data.Entity.drink.Drink;
+import com.example.onlineorders.data.Entity.food.Food;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

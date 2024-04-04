@@ -1,6 +1,6 @@
 package com.example.onlineorders.controller;
 
-import com.example.onlineorders.Entity.order.Order;
+import com.example.onlineorders.data.Entity.order.Order;
 import com.example.onlineorders.service.OrderService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/order")

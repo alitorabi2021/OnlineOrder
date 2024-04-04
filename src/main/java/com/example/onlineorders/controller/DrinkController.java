@@ -1,10 +1,9 @@
 package com.example.onlineorders.controller;
 
-import com.example.onlineorders.Entity.drink.Drink;
+import com.example.onlineorders.data.Entity.drink.Drink;
 import com.example.onlineorders.service.DrinkService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

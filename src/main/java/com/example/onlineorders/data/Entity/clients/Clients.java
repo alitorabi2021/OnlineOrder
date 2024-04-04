@@ -1,4 +1,4 @@
-package com.example.onlineorders.Entity.clients;
+package com.example.onlineorders.data.Entity.clients;
 
 
 import jakarta.persistence.*;
@@ -16,9 +16,10 @@ import org.hibernate.annotations.NaturalId;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Clients {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull(message = "Please enter your first and last name !")
     @NotBlank(message = "Your first and last name must not be blank")

@@ -1,4 +1,4 @@
-package com.example.onlineorders.Entity.order;
+package com.example.onlineorders.data.Entity.order;
 
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;

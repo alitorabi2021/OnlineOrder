@@ -1,13 +1,10 @@
-package com.example.onlineorders.Entity.drink;
+package com.example.onlineorders.data.Entity.drink;
 
-import com.example.onlineorders.Entity.order.Order;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
-
-import java.util.List;
 
 @Table
 @Entity
