@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class OrderService implements IService<Order>{
+public class OrderService implements CrudService<Order> {
 
 
     final
@@ -42,28 +42,30 @@ public class OrderService implements IService<Order>{
          orderRepository.delete(checkData(order));
          return "delete order in database";
     }
-
-
-    public Order checkData(Order foods){
-        Order order;
-        if (foods.getId()!=null) {
-            order=orderRepository.getOrderById(foods.getId());
-        }else {
-            order=orderRepository.getOrderByOrderNumber(foods.getOrderNumber());
-        }
-        return order;
-    }
-
-
     @Override
     public Order update(Order order){
         Order oldOrder=checkData(order);
         oldOrder.setOrderNumber(order.getOrderNumber());
         oldOrder.setFoods(order.getFoods());
         oldOrder.setDrinks(order.getDrinks());
-        oldOrder.setClients(order.getClients());
+        oldOrder.setClient(order.getClient());
+        order.setOrderTime(order.getOrderTime());
         orderRepository.save(oldOrder);
         return oldOrder;
     }
+
+
+    public Order checkData(Order oldOrder){
+        Order order;
+        if (oldOrder.getId()!=null) {
+            order=orderRepository.getOrderById(oldOrder.getId());
+        }else {
+            order=orderRepository.getOrderByOrderNumber(oldOrder.getOrderNumber());
+        }
+        return order;
+    }
+
+
+
 
 }

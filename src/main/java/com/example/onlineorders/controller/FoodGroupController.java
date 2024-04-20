@@ -13,26 +13,37 @@ import java.util.List;
 @RestController
 public class FoodGroupController {
 
-    final
-    FoodGroupService foodGroupService;
+    final FoodGroupService foodGroupService;
     public FoodGroupController(FoodGroupService foodGroupService) {
         this.foodGroupService = foodGroupService;
     }
+
+
     @PostMapping
-    public ResponseEntity<String> saveFoodGroup(@RequestBody FoodGroup foodGroup){
-        return new ResponseEntity<>(foodGroupService.save(foodGroup), HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public String save(@RequestBody FoodGroup foodGroup){
+        return foodGroupService.save(foodGroup);
     }
 
     @GetMapping("/id")
-    public FoodGroup getFoodGroup(@Param("id") Integer id){
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public FoodGroup getById(@Param("id") Integer id){
         return foodGroupService.getById(id);
     }
     @GetMapping
-    public List<FoodGroup> getAllFoodGroup(){
+    @ResponseStatus(HttpStatus.OK)
+    public List<FoodGroup> getAll(){
         return foodGroupService.getAll();
     }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public FoodGroup update(FoodGroup foodGroup){
+    return foodGroupService.update(foodGroup);
+    }
     @DeleteMapping
-    public String deleteFoodGroup(@RequestBody FoodGroup foodGroup){
+    @ResponseStatus(HttpStatus.OK)
+    public String delete(@RequestBody FoodGroup foodGroup){
         return foodGroupService.delete(foodGroup);
     }
 

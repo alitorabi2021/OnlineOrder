@@ -17,37 +17,38 @@ import java.util.Map;
 @RequestMapping("/food")
 public class FoodController {
 
-    @Autowired
-    private  RestTemplate restTemplate;
-
     final FoodService foodService;
 
-    @GetMapping("/ali")
-    public String getString(){
-        Map<String,String> stringMap=new HashMap<>();
-        return restTemplate.getForObject("http://localhost:9090/api",String.class,stringMap);
-    }
     public FoodController(FoodService foodService) {
         this.foodService = foodService;
     }
 
     @PostMapping
-    public ResponseEntity<String> saveClients(@RequestBody Food food){
+    public ResponseEntity<String> save(@RequestBody Food food){
         foodService.save(food);
         return new ResponseEntity<>("Create New Foods and save in database",HttpStatus.CREATED);
     }
+
     @GetMapping
-    public List<Food> getAllClients(){
-        return foodService.getAll();
+    public ResponseEntity<List<Food>> getAll(){
+    return new ResponseEntity<>(foodService.getAll(),HttpStatus.OK);
     }
+
     @GetMapping("/id")
-    public Food getClientById(@Param("id") Integer id){
-        return foodService.getById(id);
+    public ResponseEntity<Food> getClientById(@Param("id") Integer id){
+        return new ResponseEntity<>(foodService.getById(id),HttpStatus.ACCEPTED);
+    }
+
+
+    @PutMapping
+    public ResponseEntity<Food> update(@RequestBody Food food){
+        return new ResponseEntity<>(foodService.update(food),HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteClientById(@RequestBody Food food){
+    public ResponseEntity<String> delete(@RequestBody Food food){
         return new ResponseEntity<>(foodService.delete(food),HttpStatus.ACCEPTED);
     }
+
 
 }

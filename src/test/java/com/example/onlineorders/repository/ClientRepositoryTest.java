@@ -1,8 +1,8 @@
 package com.example.onlineorders.repository;
 
-import com.example.onlineorders.data.Entity.clients.Clients;
-import com.example.onlineorders.data.Entity.clients.RoleClients;
-import com.example.onlineorders.data.repository.ClientsRepository;
+import com.example.onlineorders.data.Entity.clients.Client;
+import com.example.onlineorders.data.Entity.clients.RoleClient;
+import com.example.onlineorders.data.repository.ClientRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -14,27 +14,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ClientRepositoryTest {
 
 
 
     @Autowired
-    private ClientsRepository clientsRepository;
+    private ClientRepository clientRepository;
 
 
     @Test
-    @Order(1)
     public void test_parameter(){
-        List<Clients> clients=clientsRepository.findAll();
-        for (Clients client:clients){
-            assertNotNull(clientsRepository.getClientsById(client.getId()));
+        List<Client> clients= clientRepository.findAll();
+        for (Client client:clients){
+            assertNotNull(clientRepository.getClientsById(client.getId()));
 
-            assertEquals(client,clientsRepository.findByEmail(client.getEmail()).orElseThrow());
+            assertEquals(client, clientRepository.findByEmail(client.getEmail()).orElseThrow());
             assertNotNull(client.getEmail());
             assertTrue(client.getEmail().length()>=8);
 
-            assertNotNull(client.getRoleClients());
+            assertNotNull(client.getRoleClient());
 
             assertNotNull(client.getPassword());
             assertTrue(client.getPassword().length()>=8);
@@ -44,7 +42,7 @@ public class ClientRepositoryTest {
             assertNotEquals(0, client.getId());
 
             assertNotNull(client.getPhoneNumber());
-//            assertTrue(client.getPhoneNumber().length()==11);
+            assertTrue(client.getPhoneNumber().length()==11);
 
 
             assertNotNull(client.getFullName());
@@ -52,27 +50,26 @@ public class ClientRepositoryTest {
 
 
         }
-        assertEquals(clientsRepository.findAll(),clients);
+        assertEquals(clientRepository.findAll(),clients);
     }
 
     @Test
-    @Order(2)
     public void test_save(){
-        Clients clients;clients=new Clients();
-        clients.setFullName("ali");
-        clients.setEmail("torabiali883@gmail.com");
-        clients.setPassword("12as12as");
-        clients.setPhoneNumber("534564654");
-        clients.setRoleClients(RoleClients.builder().id(1).build());
-        clientsRepository.save(clients);
+        Client client;
+        client =new Client();
+        client.setFullName("ali");
+        client.setEmail("torabiali883@gmail.com");
+        client.setPassword("12as12as");
+        client.setPhoneNumber("534564654");
+        client.setRoleClient(RoleClient.builder().id(1).build());
+        clientRepository.save(client);
     }
 
 
     @Test
-    @Order(3)
     public void test_delete(){
-        Clients clients=clientsRepository.findByEmail("torabiali88@gmail.com").orElseThrow();
-        clientsRepository.delete(clients);
+        Client client = clientRepository.findByEmail("torabiali887@gmail.com").orElseThrow();
+        clientRepository.delete(client);
     }
 
 

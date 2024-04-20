@@ -2,6 +2,7 @@ package com.example.onlineorders.controller;
 
 import com.example.onlineorders.data.Entity.drink.Drink;
 import com.example.onlineorders.service.DrinkService;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,23 +20,23 @@ public class DrinkController {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveDrink(@RequestBody Drink drink){
+    public ResponseEntity<String> save(@RequestBody Drink drink){
        return new ResponseEntity<>(drinkService.save(drink), HttpStatus.CREATED);
     }
     @GetMapping
-    public ResponseEntity<List<Drink>>getAllDrink(){
+    public ResponseEntity<List<Drink>>getAll(){
         return new ResponseEntity<>(drinkService.getAll(),HttpStatus.ACCEPTED);
     }
     @GetMapping("/id")
-    public Drink getDrink(@Param("id") Integer id)  {
-       return drinkService.getById(id);
+    public ResponseEntity<Drink> getById(@Param("id") Integer id)  {
+       return new ResponseEntity<>(drinkService.getById(id),HttpStatus.OK);
     }
     @PutMapping
-    public Drink updateDrink(@RequestBody Drink drink){
-        return drinkService.update(drink);
+    public ResponseEntity<Drink> update(@RequestBody Drink drink){
+        return new ResponseEntity<>(drinkService.update(drink),HttpStatus.OK);
     }
     @DeleteMapping
-    public String deleteDrink(@RequestBody Drink drink){
-        return drinkService.delete(drink);
+    public ResponseEntity<String> delete(@RequestBody Drink drink){
+        return new ResponseEntity<>(drinkService.delete(drink),HttpStatus.ACCEPTED);
     }
 }

@@ -15,13 +15,10 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class Address {
-        @NotNull
-        @NotBlank
+
         private String street;
-        @NotNull
-        @NotBlank
+
         private String alley;
-        @NotNull
-        @NotBlank
+
         private String plaqueHome;
 }

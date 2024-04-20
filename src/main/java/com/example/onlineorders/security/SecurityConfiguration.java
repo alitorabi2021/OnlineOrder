@@ -22,7 +22,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class  SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter) {
@@ -33,19 +33,17 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth->auth
                         .requestMatchers("/clients/**").permitAll()
-                        .requestMatchers("/food/**","/drink/**").hasAuthority("ADMIN")
-                        .requestMatchers("/foodGroup/**").hasAnyAuthority("USER","ADMIN")
+                        .requestMatchers("/food/**","/drink/**","/foodGroup/**","/order/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable);
-        return http.build();
+                return http.build();
     }
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
         configuration.setAllowedOrigins(List.of("http://localhost:8080"));
         configuration.setAllowedMethods(List.of("GET","POST"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));

@@ -20,9 +20,6 @@ public class FoodGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(unique = true)
     @NaturalId
-    @NotNull(message = "Please enter your name FoodGroup")
-    @NotBlank(message = "your name foodGroup must not be blank")
     private String name;
 }

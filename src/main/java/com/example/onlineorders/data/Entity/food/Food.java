@@ -1,5 +1,6 @@
 package com.example.onlineorders.data.Entity.food;
 
+import com.example.onlineorders.data.Entity.order.Order;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,14 +21,15 @@ public class Food {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(unique = true,nullable = false)
-    @NotNull(message = "Please enter your name food")
     @NaturalId
-    @NotBlank(message = "your name food must not be blank")
     private String name;
     @ManyToOne
     private FoodGroup foodGroup;
     private Long price;
     private String description;
+    @Transient
+    private Integer foodNumber;
+
 
 
 

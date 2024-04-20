@@ -16,14 +16,14 @@ public class Drink {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull(message = "Please enter your name drink")
     @Column(unique = true,nullable = false)
     @NaturalId
-    @NotBlank(message = "your name drink must not be blank")
     private String name;
-    @Column(nullable = false)
-    @NotNull(message = "Please enter your price drink")
     private Long price;
+    @Transient
+    private Integer drinkNumber;
+
+
 
 
 

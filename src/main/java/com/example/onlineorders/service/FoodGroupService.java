@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class FoodGroupService implements IService<FoodGroup> {
+public class FoodGroupService implements CrudService<FoodGroup> {
 
     private final FoodGroupRepository foodGroupRepository;
 
