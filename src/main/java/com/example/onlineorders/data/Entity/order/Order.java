@@ -25,7 +25,6 @@ public class Order {
     private Integer id;
     @Column(name = "order_number")
     @NaturalId
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderNumber;
     @ManyToMany
     private List<Food> foods;

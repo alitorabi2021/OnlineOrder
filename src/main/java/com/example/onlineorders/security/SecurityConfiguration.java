@@ -33,7 +33,8 @@ public class  SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth->auth
                         .requestMatchers("/clients/**").permitAll()
-                        .requestMatchers("/food/**","/drink/**","/foodGroup/**","/order/**").hasAuthority("ADMIN")
+                        .requestMatchers("/food/**","/drink/**","/foodGroup/**").hasAuthority("ADMIN")
+                        .requestMatchers("/order/**").authenticated()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

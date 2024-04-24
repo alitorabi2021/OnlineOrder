@@ -5,6 +5,7 @@ import com.example.onlineorders.data.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -44,14 +45,19 @@ public class OrderService implements CrudService<Order> {
     }
     @Override
     public Order update(Order order){
-        Order oldOrder=checkData(order);
-        oldOrder.setOrderNumber(order.getOrderNumber());
-        oldOrder.setFoods(order.getFoods());
-        oldOrder.setDrinks(order.getDrinks());
-        oldOrder.setClient(order.getClient());
-        order.setOrderTime(order.getOrderTime());
-        orderRepository.save(oldOrder);
-        return oldOrder;
+        Order newOrder=checkData(order);
+            newOrder.setTotalDrink(order.getTotalDrink());
+            newOrder.setTotalFood(order.getTotalFood());
+            newOrder.setTotal(order.getTotal());
+            newOrder.setOrderTime(new Timestamp(System.currentTimeMillis()));
+            newOrder.setClient(order.getClient());
+            newOrder.setDrinks(order.getDrinks());
+            newOrder.setFoods(order.getFoods());
+            newOrder.setOrderNumber(order.getOrderNumber());
+            newOrder.setAddress(order.getAddress());
+
+        orderRepository.save(newOrder);
+        return newOrder;
     }
 
 
