@@ -2,10 +2,10 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    username: sa
-    password: 12as12as
+    username: # enter sql user
+    password: # enter sql password
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://DESKTOP-IDFPJR7;database=RestaurantOnline
+    url: jdbc:sqlserver://localhost;database=RestaurantOnline
 
   jpa:
     database: sql_server
@@ -15,8 +15,8 @@ spring:
     database-platform: org.hibernate.dialect.SQLServerDialect
   security:
     user:
-      name: ali
-      password: 12as12as
+      name: user
+      password: password
 security:
   jwt:
     secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
